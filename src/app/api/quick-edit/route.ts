@@ -2,9 +2,9 @@ import { z } from "zod";
 import { generateText, Output } from "ai";
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { anthropic } from "@ai-sdk/anthropic";
 
 import { firecrawl } from "@/lib/firecrawl";
+import { google } from "@ai-sdk/google";
 
 const quickEditSchema = z.object({
   editedCode: z
@@ -46,10 +46,7 @@ export async function POST(request: Request) {
     const { selectedCode, fullCode, instruction } = await request.json();
 
     if (!userId) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 400 });
     }
 
     if (!selectedCode) {
@@ -95,14 +92,13 @@ export async function POST(request: Request) {
       }
     }
 
-    const prompt = QUICK_EDIT_PROMPT
-      .replace("{selectedCode}", selectedCode)
+    const prompt = QUICK_EDIT_PROMPT.replace("{selectedCode}", selectedCode)
       .replace("{fullCode}", fullCode || "")
       .replace("{instruction}", instruction)
       .replace("{documentation}", documentationContext);
 
     const { output } = await generateText({
-      model: anthropic("claude-3-7-sonnet-20250219"),
+      model: google("gemini-2.0-flash"),
       output: Output.object({ schema: quickEditSchema }),
       prompt,
     });
@@ -115,4 +111,4 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
-};
+}
