@@ -91,7 +91,7 @@ export const ProjectsView = () => {
               >
                 <div className="flex items-center justify-between w-full">
                   <SparkleIcon className="size-4" />
-                  <Kbd className="bg-accent border">⌘K</Kbd>
+                  <Kbd className="bg-accent border">⌘J</Kbd>
                 </div>
                 <div>
                   <span className="text-sm">New</span>
