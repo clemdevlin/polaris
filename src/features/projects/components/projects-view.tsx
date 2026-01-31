@@ -11,12 +11,9 @@ import { Kbd } from "@/components/ui/kbd";
 
 import { ProjectsList } from "./projects-list";
 import { ProjectsCommandDialog } from "./projects-command-dialog";
-<<<<<<< HEAD
 import Image from "next/image";
-=======
 import { ImportGithubDialog } from "./import-github-dialog";
 import { NewProjectDialog } from "./new-project-dialog";
->>>>>>> 4cf8ccb5b99921aaeed08c1f4eb9081c98e8fd6d
 
 const font = Poppins({
   subsets: ["latin"],
@@ -50,7 +47,6 @@ export const ProjectsView = () => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-
   return (
     <>
       <ProjectsCommandDialog
@@ -79,7 +75,7 @@ export const ProjectsView = () => {
               <h1
                 className={cn(
                   "text-4xl md:text-5xl font-semibold",
-                  font.className
+                  font.className,
                 )}
               >
                 Nucleus
@@ -91,21 +87,7 @@ export const ProjectsView = () => {
             <div className="grid grid-cols-2 gap-2">
               <Button
                 variant="outline"
-<<<<<<< HEAD
-                onClick={() => {
-                  const projectName = uniqueNamesGenerator({
-                    dictionaries: [adjectives, animals, colors],
-                    separator: "-",
-                    length: 3,
-                  });
-
-                  createProject({
-                    name: projectName,
-                  });
-                }}
-=======
                 onClick={() => setNewProjectDialogOpen(true)}
->>>>>>> 4cf8ccb5b99921aaeed08c1f4eb9081c98e8fd6d
                 className="h-full items-start justify-start p-4 bg-background border flex flex-col gap-6 rounded-none"
               >
                 <div className="flex items-center justify-between w-full">
