@@ -3,12 +3,6 @@
 import { Poppins } from "next/font/google";
 import { SparkleIcon } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
-import {
-  adjectives,
-  animals,
-  colors,
-  uniqueNamesGenerator,
-} from "unique-names-generator";
 import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
@@ -16,9 +10,13 @@ import { Button } from "@/components/ui/button";
 import { Kbd } from "@/components/ui/kbd";
 
 import { ProjectsList } from "./projects-list";
-import { useCreateProject } from "../hooks/use-projects";
 import { ProjectsCommandDialog } from "./projects-command-dialog";
+<<<<<<< HEAD
 import Image from "next/image";
+=======
+import { ImportGithubDialog } from "./import-github-dialog";
+import { NewProjectDialog } from "./new-project-dialog";
+>>>>>>> 4cf8ccb5b99921aaeed08c1f4eb9081c98e8fd6d
 
 const font = Poppins({
   subsets: ["latin"],
@@ -26,9 +24,9 @@ const font = Poppins({
 });
 
 export const ProjectsView = () => {
-  const createProject = useCreateProject();
-
   const [commandDialogOpen, setCommandDialogOpen] = useState(false);
+  const [importDialogOpen, setImportDialogOpen] = useState(false);
+  const [newProjectDialogOpen, setNewProjectDialogOpen] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -37,6 +35,14 @@ export const ProjectsView = () => {
           e.preventDefault();
           setCommandDialogOpen(true);
         }
+        if (e.key === "i") {
+          e.preventDefault();
+          setImportDialogOpen(true);
+        }
+        if (e.key === "j") {
+          e.preventDefault();
+          setNewProjectDialogOpen(true);
+        }
       }
     };
 
@@ -44,11 +50,20 @@ export const ProjectsView = () => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+
   return (
     <>
       <ProjectsCommandDialog
         open={commandDialogOpen}
         onOpenChange={setCommandDialogOpen}
+      />
+      <ImportGithubDialog
+        open={importDialogOpen}
+        onOpenChange={setImportDialogOpen}
+      />
+      <NewProjectDialog
+        open={newProjectDialogOpen}
+        onOpenChange={setNewProjectDialogOpen}
       />
       <div className="min-h-screen bg-sidebar flex flex-col items-center justify-center p-6 md:p-16">
         <div className="w-full max-w-sm mx-auto flex flex-col gap-4 items-center">
@@ -76,6 +91,7 @@ export const ProjectsView = () => {
             <div className="grid grid-cols-2 gap-2">
               <Button
                 variant="outline"
+<<<<<<< HEAD
                 onClick={() => {
                   const projectName = uniqueNamesGenerator({
                     dictionaries: [adjectives, animals, colors],
@@ -87,6 +103,9 @@ export const ProjectsView = () => {
                     name: projectName,
                   });
                 }}
+=======
+                onClick={() => setNewProjectDialogOpen(true)}
+>>>>>>> 4cf8ccb5b99921aaeed08c1f4eb9081c98e8fd6d
                 className="h-full items-start justify-start p-4 bg-background border flex flex-col gap-6 rounded-none"
               >
                 <div className="flex items-center justify-between w-full">
@@ -99,7 +118,7 @@ export const ProjectsView = () => {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => {}}
+                onClick={() => setImportDialogOpen(true)}
                 className="h-full items-start justify-start p-4 bg-background border flex flex-col gap-6 rounded-none"
               >
                 <div className="flex items-center justify-between w-full">
