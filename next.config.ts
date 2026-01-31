@@ -2,28 +2,27 @@ import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-<<<<<<< HEAD
   /* config options here */
   typescript: {
     ignoreBuildErrors: true,
   },
-=======
   async headers() {
     return [
       {
         source: "/:path*",
         headers: [
-          { 
-            key: "Cross-Origin-Embedder-Policy", value: "credentialless"
+          {
+            key: "Cross-Origin-Embedder-Policy",
+            value: "credentialless",
           },
-          { 
-            key: "Cross-Origin-Opener-Policy", value: "same-origin"
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin",
           },
         ],
-      }
+      },
     ];
-  }
->>>>>>> 4cf8ccb5b99921aaeed08c1f4eb9081c98e8fd6d
+  },
 };
 
 export default withSentryConfig(nextConfig, {
